@@ -11,6 +11,9 @@ using log4net;
 using QuickBootstrap.Cache;
 using QuickBootstrap.Entities;
 using StackExchange.Redis;
+using System.Diagnostics;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace QuickBootstrap
 {
@@ -37,8 +40,22 @@ namespace QuickBootstrap
                 if (RedisContext.RedisDatabase == null)
                 {
                     RedisContext.RedisDatabase = ConnectionMultiplexer.Connect(RedisConnection).GetDatabase();
+                    //Stopwatch sw = new Stopwatch();
+                    //sw.Start();
+                    //new DefaultDbContext().User.All(SetUserToCache);
+                    //sw.Stop();
+                    //_logger.InfoFormat("DB-->Cache耗时：{0},条数：{1}", sw.Elapsed, count);
+                    
+                    RedisContext cache = new RedisContext();
+                    _logger.InfoFormat("user", cache.Get<User>("1@1.com"));
                 }
             });
+        }
+
+        public bool SetUserToCache(User user)
+        {
+            RedisContext cache = new RedisContext();
+            return cache.Set(user.UserName, user);
         }
 
         private void CurrentDomainOnFirstChanceException(object sender, FirstChanceExceptionEventArgs e)

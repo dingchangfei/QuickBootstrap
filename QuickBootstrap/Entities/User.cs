@@ -7,6 +7,7 @@ namespace QuickBootstrap.Entities
     /// <summary>
     /// 用户表
     /// </summary>
+    [Serializable]
     public class User
     {
         [Key]

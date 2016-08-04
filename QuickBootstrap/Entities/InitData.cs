@@ -15,11 +15,11 @@ namespace QuickBootstrap.Entities
             new List<User>
             {
                 new User{
-                UserName="mr.wangya@qq.com", 
-                UserPwd= "670b14728ad9902aecba32e22fa4f6bd", 
+                UserName="1@1.com", 
+                UserPwd= "96e79218965eb72c92a549dd5a330112", 
                 CreateTime = DateTime.Now, 
                 IsEnable = true,
-                Nick = "SmartBooks"}
+                Nick = "Ding"}
             }.ForEach(m => context.User.Add(m));
         }
     }
